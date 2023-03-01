@@ -1,6 +1,13 @@
 import "react-native-get-random-values";
 
-import { Button, Modal, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Keyboard,
+  StatusBar,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { InputItems, List, ModalItem } from "./src/components";
 import React, { useState } from "react";
 
@@ -29,34 +36,63 @@ export default function App() {
     setItems((oldArry) => oldArry.filter((item) => item.id !== id));
     setSelectedItem(null);
   };
+  const completedItem = (id) => {
+    const itemChange = items.find((item) => item.id == id);
+    itemChange.completed = !itemChange.completed;
+    setItems((oldArry) => oldArry.filter((item) => item.id !== id));
+    setSelectedItem(null);
+    setModalVisible(!modalVisible);
+    setItems(items);
+  };
   return (
-    <View style={styles.container}>
-      <InputItems
-        onChangeText={onChangeText}
-        itemText={itemText}
-        addItem={addItem}
-      />
-      <List items={items} selectItem={selectItem} />
-      <View>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss();
+      }}
+    >
+      <View style={styles.container}>
+        <StatusBar
+          animated={true}
+          backgroundColor="white"
+          barStyle="dark-content"
+        />
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://media2.giphy.com/media/1Pn9VCFR6LxWDJaTvq/giphy.gif?cid=ecf05e47j8n1rhy4qplknwo28cbqnlwi9k2atf45377lky4x&rid=giphy.gif&ct=s",
+          }}
+        />
+        <InputItems
+          onChangeText={onChangeText}
+          itemText={itemText}
+          addItem={addItem}
+        />
+        <List items={items} selectItem={selectItem} />
         <ModalItem
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
           removeItem={removeItem}
+          completedItem={completedItem}
         />
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 50,
-    paddingHorizontal: 10,
+    padding: 10,
+    height:"100%",
+    width:"100%",
+  },
+  logo: {
+    width: 60,
+    height: 60,
+    marginBottom: 10,
   },
 });

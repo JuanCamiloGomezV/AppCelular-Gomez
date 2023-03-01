@@ -1,8 +1,19 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-
-import React from "react";
+import React,{useEffect, useState} from "react";
 
 const InputItems = ({onChangeText,itemText,addItem}) => {
+  const [isPressable,setIsPressable]= useState(false);
+  const activePressable = () =>{
+    if(itemText.length > 0){
+      setIsPressable(true);
+    }
+    else{
+      setIsPressable(false);
+    }
+  }
+  useEffect(()=>{
+    activePressable()
+  },[itemText])
   return (
     <View style={styles.containerForm}>
       <TextInput
@@ -11,8 +22,7 @@ const InputItems = ({onChangeText,itemText,addItem}) => {
         placeholder="Ingrese el Item"
         style={styles.textInput}
       />
-     
-      <Pressable onPress={addItem} title="Agregar" style={styles.addInput}>
+      <Pressable onPress={addItem} title="Agregar" style={isPressable ? styles.addInputPressable : styles.addInputNoPressable}>
         <Text style={styles.addTextInput}>
             Agregar
         </Text>
@@ -34,10 +44,24 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 250,
     textAlign: "center",
-    borderColor: "#adacac",
+    borderColor: "#e7e7e7",
+    backgroundColor:"#f8f8f8",
+    borderTopLeftRadius:5,
+    borderBottomLeftRadius:5,
+    marginRight:-0.1
   },
-  addInput:{
+  addInputPressable:{
     backgroundColor:"#00b5fd",
+    padding:8,
+    width: "auto",
+    height: "auto",
+    borderTopRightRadius:5,
+    borderBottomRightRadius:5,
+    justifyContent: "center",
+    alignItems:"center"
+  },
+  addInputNoPressable:{
+    backgroundColor:"#00b5fd3e",
     padding:8,
     width: "auto",
     height: "auto",
