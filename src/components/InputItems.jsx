@@ -22,7 +22,7 @@ const InputItems = ({onChangeText,itemText,addItem}) => {
         placeholder="Ingrese el Item"
         style={styles.textInput}
       />
-      <Pressable onPress={addItem} title="Agregar" style={isPressable ? styles.addInputPressable : styles.addInputNoPressable}>
+      <Pressable onPress={addItem} title="Agregar" style={isPressable ? styles.addInputPressable : styles.addInputNoPressable} disabled={isPressable}>
         <Text style={styles.addTextInput}>
             Agregar
         </Text>
