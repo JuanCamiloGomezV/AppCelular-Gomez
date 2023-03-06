@@ -8,8 +8,8 @@ import {
 import React, { useState } from "react";
 
 import Button from "../components/Button";
-import COLORS from "../constants/Colors";
 import Card from "../components/Card";
+import Colors from "../constants/Colors";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 
@@ -67,7 +67,7 @@ const StartGameScreen = ({ onStartGame }) => {
               <Button
                 title="Limpiar"
                 onPress={handlerResetInput}
-                color={COLORS.accent}
+                color={Colors.accent}
                 styleTextButton={{ color: "white" }}
               />
             </View>
@@ -75,7 +75,7 @@ const StartGameScreen = ({ onStartGame }) => {
               <Button
                 title="Confirmar"
                 onPress={confirmInputHandler}
-                color={COLORS.primary}
+                color={Colors.primary}
                 styleTextButton={{ color: "white" }}
               />
             </View>
@@ -87,7 +87,7 @@ const StartGameScreen = ({ onStartGame }) => {
             <NumberContainer>{selectedNumber}</NumberContainer>
             <Button
               title="Iniciar Juego"
-              color={COLORS.primary}
+              color={Colors.primary}
               styleTextButton={{color:"white"}}
               onPress={() => {
                 onStartGame(selectedNumber);
