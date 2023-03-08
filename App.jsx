@@ -7,7 +7,8 @@ import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
 
 export default function App() {
-  const [numberSelected, setNumberSelected] = useState('11')
+  const [numberSelected, setNumberSelected] = useState('')
+  const [readyToPlay, setReadyToPlay] = useState(false);
   return (
     <View style={styles.container}>
       <StatusBar
@@ -15,7 +16,8 @@ export default function App() {
       backgroundColor="#ff9900"
       hidden={false}/>
       <Header title="Adivina el número"/>
-      <StartGameScreen setNumberSelected={setNumberSelected} numberSelected={numberSelected}/>
+      {!readyToPlay?<StartGameScreen setNumberSelected={setNumberSelected} numberSelected={numberSelected} setReadyToPlay={setReadyToPlay}/>:null}
+      
     </View>
   );
 }
