@@ -1,31 +1,16 @@
 import "react-native-get-random-values";
 
-import * as SplashScreen from 'expo-splash-screen';
-
 import React, { useState } from "react";
-import { StatusBar, StyleSheet, View } from "react-native";
+import { StatusBar, StyleSheet, Text, View } from "react-native";
 
 import Colors from "./src/constants/Colors";
 import GameScreen from "./src/screens/GameScreen";
 import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
-import { useFonts } from "expo-font";
-
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
- 
-  React.useEffect(() =>{
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-
-  }, [fontsLoaded])
   const [numberSelected, setNumberSelected] = useState("");
   const [readyToPlay, setReadyToPlay] = useState(false);
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
     <View style={styles.container}>
       <StatusBar animated={true} backgroundColor={Colors.primary} hidden={false} />
