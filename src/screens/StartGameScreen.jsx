@@ -5,15 +5,17 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import Input from "../components/Input";
 
-const StartGameScreen = ({ setNumberSelected, numberSelected, setConfirm }) => {
-  const [number, setNumber] = useState('');
-  console.log(number.length)
+const StartGameScreen = ({ setNumberSelected, numberSelected }) => {
+  const [number, setNumber] = useState("");
+  const [confirm, setConfirm] = useState(false);
   const handlerChangeNumber = (newNumber) => {
-    const newNumberParser = parseInt(newNumber);
-    if (/^\d+$/.test(newNumberParser)) setNumber(newNumberParser);
+    setNumber(newNumber.replace(/[^0-9]/g, ""));
   };
   const handlerButtonConfirmClick = () => {
-    setNumberSelected(number);
+    const numberParser = parseInt(number);
+    setNumberSelected(numberParser);
+    setConfirm(true);
+    setNumber('')
   };
   return (
     <View>
@@ -25,7 +27,8 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setConfirm }) => {
             style={styles.inputCard}
             onChangeText={handlerChangeNumber}
             value={number}
-            //keyboardType="numeric"
+            keyboardType="number-pad"
+            maxLength={2}
           />
           <View style={styles.buttonContainerCard}>
             <Button
@@ -46,6 +49,23 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setConfirm }) => {
           </View>
         </Card>
       </View>
+      {confirm && (
+        <View style={styles.cardContainer}>
+          <Card style={styles.numberCard}>
+            <Text style={styles.titleNumberCard}>Tu elección</Text>
+            <View style={styles.numberContainer}>
+              <Text style={styles.number}>{numberSelected}</Text>
+            </View>
+            <Button
+              styleButtonType={{ width: 90, marginTop: 10 }}
+              color="#ff9900"
+              colorText="white"
+              onPress={handlerButtonConfirmClick}
+              title="Ir a jugar"
+            />
+          </Card>
+        </View>
+      )}
     </View>
   );
 };
@@ -81,5 +101,27 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-around",
     marginTop: 10,
+  },
+  numberCard: {
+    width: 150,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  titleNumberCard: {
+    marginBottom: 10,
+  },
+  numberContainer: {
+    borderColor: "#ff9900",
+    borderWidth: 1,
+    paddingVertical: 20,
+    borderRadius: 10,
+    minWidth: 40,
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  number: {
+    color: "#ff9900",
+    fontSize: 25,
   },
 });

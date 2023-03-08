@@ -7,8 +7,7 @@ import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
 
 export default function App() {
-  const [numberSelected, setNumberSelected] = useState('')
-  const [confirm,setConfirm] = useState(false)
+  const [numberSelected, setNumberSelected] = useState('11')
   return (
     <View style={styles.container}>
       <StatusBar
