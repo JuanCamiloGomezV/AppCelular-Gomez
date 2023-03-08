@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer";
 
 const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) => {
   const [number, setNumber] = useState("");
@@ -67,9 +68,7 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) 
             <Icon name="close" size={15} color="#7a0101" onPress={handlerCloseCardNumber}/>
             </View>
             <Text style={styles.titleNumberCard}>Tu elección</Text>
-            <View style={styles.numberContainer}>
-              <Text style={styles.number}>{numberSelected}</Text>
-            </View>
+            <NumberContainer>{numberSelected}</NumberContainer>
             <Button
               styleButtonType={{ width: 90, marginTop: 10 }}
               color="#ff9900"
@@ -126,19 +125,5 @@ const styles = StyleSheet.create({
   },
   titleNumberCard: {
     marginBottom: 10,
-  },
-  numberContainer: {
-    borderColor: "#ff9900",
-    borderWidth: 1,
-    paddingVertical: 20,
-    borderRadius: 10,
-    minWidth: 40,
-    width: 50,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  number: {
-    color: "#ff9900",
-    fontSize: 25,
   },
 });
