@@ -27,6 +27,9 @@ export default function App() {
   }, [fontsLoaded])
   const [numberSelected, setNumberSelected] = useState("");
   const [readyToPlay, setReadyToPlay] = useState(false);
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <StatusBar animated={true} backgroundColor={Colors.primary} hidden={false} />
