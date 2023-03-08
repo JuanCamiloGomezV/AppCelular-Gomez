@@ -3,11 +3,12 @@ import "react-native-get-random-values";
 import React, { useState } from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 
-import Card from "./src/components/Card";
 import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
 
 export default function App() {
+  const [numberSelected, setNumberSelected] = useState('')
+  const [confirm,setConfirm] = useState(false)
   return (
     <View style={styles.container}>
       <StatusBar
@@ -15,7 +16,7 @@ export default function App() {
       backgroundColor="#ff9900"
       hidden={false}/>
       <Header title="Adivina el número"/>
-      <StartGameScreen/>
+      <StartGameScreen setNumberSelected={setNumberSelected} numberSelected={numberSelected}/>
     </View>
   );
 }

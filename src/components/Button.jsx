@@ -8,12 +8,13 @@ const Button = ({
     colorText,
     color,
     onPress,
-    title
+    title,
+    ...otherProps
 }) => {
   return (
     <Pressable
       style={[styles.button, styleButtonType,{backgroundColor:color}]}
-      onPress={onPress}
+      onPress={onPress} {...otherProps}
     >
       <Text style={{...styleTextButton,color:colorText}}>{title}</Text>
     </Pressable>

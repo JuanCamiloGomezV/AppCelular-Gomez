@@ -1,32 +1,47 @@
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import Button from "../components/Button";
 import Card from "../components/Card";
 import Input from "../components/Input";
-import React from "react";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ setNumberSelected, numberSelected, setConfirm }) => {
+  const [number, setNumber] = useState('');
+  console.log(number.length)
+  const handlerChangeNumber = (newNumber) => {
+    const newNumberParser = parseInt(newNumber);
+    if (/^\d+$/.test(newNumberParser)) setNumber(newNumberParser);
+  };
+  const handlerButtonConfirmClick = () => {
+    setNumberSelected(number);
+  };
   return (
     <View>
       <Text style={styles.title}>Comenzar Juego</Text>
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Text style={styles.titleCard}>Elije un número</Text>
-          <Input style={styles.inputCard} />
+          <Input
+            style={styles.inputCard}
+            onChangeText={handlerChangeNumber}
+            value={number}
+            //keyboardType="numeric"
+          />
           <View style={styles.buttonContainerCard}>
             <Button
-            styleButtonType={{width:90}}
+              styleButtonType={{ width: 90 }}
               color="#7a7a7a"
-              colorText='white'
+              colorText="white"
               onPress={() => {}}
               title="Limpiar"
             />
             <Button
-            styleButtonType={{width:90}}
-              color="#ff9900"
-              colorText='white'
-              onPress={() => {}}
+              styleButtonType={{ width: 90 }}
+              color={number.length <= 0 ? "#ff990076" : "#ff9900"}
+              colorText="white"
+              onPress={handlerButtonConfirmClick}
               title="Confirmar"
+              disabled={number.length <= 0 ? true : false}
             />
           </View>
         </Card>
@@ -52,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    padding:13,
+    padding: 13,
     width: 320,
   },
   titleCard: {
@@ -61,9 +76,10 @@ const styles = StyleSheet.create({
   inputCard: {
     width: 30,
   },
-  buttonContainerCard:{
+  buttonContainerCard: {
     flexDirection: "row",
-    width:"100%",
+    width: "100%",
     justifyContent: "space-around",
-  }
+    marginTop: 10,
+  },
 });

@@ -1,11 +1,10 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 
 import React from 'react'
 
-const Input = ({style}) => {
+const Input = ({style, ...otherPros}) => {
   return (
-    
-    <TextInput style={{...styles.input,...style}} />
+    <TextInput style={[styles.input, style]} {...otherPros}/>
   )
 }
 
@@ -18,5 +17,5 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         marginVertical: 10,
         textAlign:'center'
-      },
+    }
 })
