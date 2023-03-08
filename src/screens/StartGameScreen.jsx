@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import Card from "../components/Card";
+import Input from "../components/Input";
 import React from "react";
 
 const StartGameScreen = () => {
@@ -10,7 +11,7 @@ const StartGameScreen = () => {
       <View style={styles.cardContainer}>
         <Card style={styles.card}>
           <Text style={styles.titleCard}>Elije un número</Text>
-          <TextInput style={styles.inputCard} />
+          <Input style={styles.inputCard}/>
         </Card>
       </View>
     </View>
@@ -32,15 +33,13 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center"
   },
   titleCard: {
     textAlign: "center",
   },
-  inputCard: {
-    padding:0,
-    margin:0,
-    height:50,
-    borderBottomWidth:1,
-    borderBottomColor:'black',
-  },
+  inputCard:{
+    width:30,
+  }
 });
