@@ -42,6 +42,7 @@ const StartGameScreen = ({
             value={number}
             keyboardType="number-pad"
             maxLength={2}
+            cursorColor="#888888"
           />
           <View style={styles.buttonContainerCard}>
             <Button
