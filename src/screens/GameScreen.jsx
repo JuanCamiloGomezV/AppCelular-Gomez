@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Button from "../components/Button";
 import Card from "../components/Card";
+import Colors from "../constants/Colors";
 import NumberContainer from "../components/NumberContainer";
 
 const GameScreen = (userOption) => {
@@ -27,13 +28,13 @@ const GameScreen = (userOption) => {
         <Card style={styles.card}>
           <Button
             title="Menor"
-            color="#ff9900"
+            color={Colors.primary}
             colorText="white"
             styleButtonType={styles.button}
           />
           <Button
             title="Mayor"
-            color="#a80202"
+            color={Colors.accent}
             colorText="white"
             styleButtonType={styles.button}
           />

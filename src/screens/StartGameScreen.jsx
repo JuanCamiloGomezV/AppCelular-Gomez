@@ -3,11 +3,16 @@ import React, { useState } from "react";
 
 import Button from "../components/Button";
 import Card from "../components/Card";
+import Colors from "../constants/Colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 
-const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) => {
+const StartGameScreen = ({
+  setNumberSelected,
+  numberSelected,
+  setReadyToPlay,
+}) => {
   const [number, setNumber] = useState("");
   const [confirm, setConfirm] = useState(false);
   const handlerChangeNumber = (newNumber) => {
@@ -21,8 +26,8 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) 
   };
   const handlerCloseCardNumber = () => {
     setConfirm(false);
-    setNumberSelected('');
-  }
+    setNumberSelected("");
+  };
   return (
     <View>
       <Text style={styles.title}>Comenzar Juego</Text>
@@ -40,7 +45,7 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) 
           <View style={styles.buttonContainerCard}>
             <Button
               styleButtonType={{ width: 90 }}
-              color="#6d6c6c"
+              color={Colors.accent}
               colorText="white"
               onPress={() => {
                 setNumber("");
@@ -49,7 +54,7 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) 
             />
             <Button
               styleButtonType={{ width: 90 }}
-              color={number.length <= 0 ? "#ff990076" : "#ff9900"}
+              color={number.length <= 0 ? "#e100ff39" : Colors.primary}
               colorText="white"
               onPress={() => {
                 handlerButtonConfirmClick();
@@ -64,14 +69,25 @@ const StartGameScreen = ({ setNumberSelected, numberSelected, setReadyToPlay }) 
       {confirm && (
         <View style={styles.cardContainer}>
           <Card style={styles.numberCard}>
-            <View style={{width: '100%', justifyContent: 'center', alignItems: 'flex-end'}}>
-            <Icon name="close" size={15} color="#7a0101" onPress={handlerCloseCardNumber}/>
+            <View
+              style={{
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
+              <Icon
+                name="close"
+                size={15}
+                color="#7a0101"
+                onPress={handlerCloseCardNumber}
+              />
             </View>
             <Text style={styles.titleNumberCard}>Tu elección</Text>
             <NumberContainer>{numberSelected}</NumberContainer>
             <Button
               styleButtonType={{ width: 90, marginTop: 10 }}
-              color="#ff9900"
+              color={Colors.primary}
               colorText="white"
               onPress={() => {
                 setReadyToPlay(true);

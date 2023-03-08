@@ -3,6 +3,7 @@ import "react-native-get-random-values";
 import React, { useState } from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 
+import Colors from "./src/constants/Colors";
 import GameScreen from "./src/screens/GameScreen";
 import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
@@ -12,7 +13,7 @@ export default function App() {
   const [readyToPlay, setReadyToPlay] = useState(false);
   return (
     <View style={styles.container}>
-      <StatusBar animated={true} backgroundColor="#ff9900" hidden={false} />
+      <StatusBar animated={true} backgroundColor={Colors.primary} hidden={false} />
       <Header title="Adivina el número" />
       {!readyToPlay ? (
         <StartGameScreen
