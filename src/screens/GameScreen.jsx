@@ -5,6 +5,7 @@ import Button from "../components/Button";
 import Card from "../components/Card";
 import Colors from "../constants/Colors";
 import NumberContainer from "../components/NumberContainer";
+import TextStyles from "../constants/TextStyles";
 
 const GameScreen = (userOption) => {
   const generateRandomBetween = (min, max, exclude) => {
@@ -50,9 +51,10 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     marginVertical: 10,
+    fontFamily: TextStyles.regularBold,
   },
   card: {
-    marginTop:10,
+    marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-around",
     width: "80%",

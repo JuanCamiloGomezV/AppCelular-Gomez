@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Colors from "../constants/Colors";
 import React from "react";
+import TextStyles from "../constants/TextStyles";
 
 const NumberContainer = ({style,children}) => {
   return (
@@ -27,5 +28,6 @@ const styles = StyleSheet.create({
       number: {
         color: Colors.accent,
         fontSize: 25,
+        fontFamily:TextStyles.regularBold
       },
 });

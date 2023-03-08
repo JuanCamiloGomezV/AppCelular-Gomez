@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 
 import React from "react";
+import TextStyles from "../constants/TextStyles";
 
 const Button = ({
     styleButtonType,
@@ -16,7 +17,7 @@ const Button = ({
       style={[styles.button, styleButtonType,{backgroundColor:color}]}
       onPress={onPress} {...otherProps}
     >
-      <Text style={{...styleTextButton,color:colorText}}>{title}</Text>
+      <Text style={{...styleTextButton,color:colorText,fontFamily: TextStyles.regular,}}>{title}</Text>
     </Pressable>
   );
 };
