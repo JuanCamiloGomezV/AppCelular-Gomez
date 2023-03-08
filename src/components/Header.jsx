@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Colors from "../constants/Colors";
 import React from "react";
+import TextStyle from "../constants/TextStyle";
 
 const Header = ({ title }) => {
   return (
@@ -23,5 +24,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "white",
+    fontFamily:TextStyle.title
   },
 });

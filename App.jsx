@@ -14,11 +14,7 @@ import { useFonts } from "expo-font";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "lobster": require("./assets/fonts/Lobster-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf")
-  });
+ 
   React.useEffect(() =>{
     if (fontsLoaded) {
       SplashScreen.hideAsync();
