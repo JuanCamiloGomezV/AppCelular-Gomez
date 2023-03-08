@@ -1,7 +1,9 @@
 import "react-native-get-random-values";
 
+import * as SplashScreen from 'expo-splash-screen';
+
 import React, { useState } from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native";
+import { StatusBar, StyleSheet, View } from "react-native";
 
 import Colors from "./src/constants/Colors";
 import GameScreen from "./src/screens/GameScreen";
