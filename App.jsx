@@ -2,12 +2,13 @@ import "react-native-get-random-values";
 
 import * as SplashScreen from 'expo-splash-screen';
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 
 import Colors from "./src/constants/Colors";
 import GameScreen from "./src/screens/GameScreen";
 import Header from "./src/components/Header";
+import Loader from "./src/components/Loader";
 import StartGameScreen from "./src/screens/StartGameScreen";
 import { useFonts } from 'expo-font';
 
@@ -28,6 +29,11 @@ export default function App() {
   }, [fontsLoaded])
   const [numberSelected, setNumberSelected] = useState("");
   const [readyToPlay, setReadyToPlay] = useState(false);
+  const [loading, setLoading] = useState(false);
+  useEffect(()=>{
+    setLoading(true);
+    setTimeout(()=>{setLoading(false)},3000)
+  },[readyToPlay])
   if (!fontsLoaded) {
     return null;
   }
@@ -42,6 +48,8 @@ export default function App() {
           setReadyToPlay={setReadyToPlay}
         />
       ) : (
+        loading?
+        <Loader/>:
         <GameScreen userOption={numberSelected} />
       )}
     </View>
