@@ -9,6 +9,9 @@ import Colors from "./src/constants/Colors";
 import GameScreen from "./src/screens/GameScreen";
 import Header from "./src/components/Header";
 import StartGameScreen from "./src/screens/StartGameScreen";
+import { useFonts } from "expo-font";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [numberSelected, setNumberSelected] = useState("");
