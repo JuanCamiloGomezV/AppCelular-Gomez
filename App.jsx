@@ -2,14 +2,15 @@ import "react-native-get-random-values";
 
 import * as SplashScreen from "expo-splash-screen";
 
-import {
-  OpenSans_400Regular,
-  OpenSans_700Bold,
-  useFonts,
-} from "@expo-google-fonts/open-sans";
+import {OpenSans_400Regular, OpenSans_700Bold, useFonts} from "@expo-google-fonts/open-sans"
 import { StyleSheet, View } from "react-native";
 
+import { Bangers_400Regular } from "@expo-google-fonts/bangers";
+import MainNavigator from "./src/navigators/MainNavigator";
 import React from "react";
+import {
+  RobotoCondensed_700Bold
+} from "@expo-google-fonts/roboto-condensed";
 import ShopNavigator from "./src/navigators/ShopNavigator";
 
 SplashScreen.preventAutoHideAsync();
@@ -17,7 +18,8 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [fontsLoaded] = useFonts({
     OpenSans_400Regular,
-    OpenSans_700Bold,
+    RobotoCondensed_700Bold,
+    Bangers_400Regular,
   });
   React.useEffect(() => {
     if (fontsLoaded) {
@@ -28,16 +30,10 @@ export default function App() {
     return null;
   }
   return (
-    <View style={styles.container}>
-      <ShopNavigator />
-    </View>
+      <MainNavigator />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    height: "100%",
-    width: "100%",
-  },
+
 });

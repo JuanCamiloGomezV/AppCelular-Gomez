@@ -1,31 +1,35 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
-import Button from "../components/Button";
-import Colors from "../constants/Colors";
+import { BREADS } from "../data/breads";
+import BreadItem from "../components/BreadItem";
 import React from "react";
 
-const CategoryBreadScreen = ({ navigation }) => {
+const CategoryBreadScreen = ({ navigation, route }) => {
+  const { categoryId } = route.params;
+  const products = [];
+  BREADS.map((item) =>
+    item.category.map((category) => {
+      if (category == categoryId) {
+        products.push(item);
+      }
+    })
+  );
+  const onSelectBreadItem = (item) => {
+    navigation.navigate("Detail", {
+      bread: item,
+    });
+  };
+  const renderBreadItem = ({ item }) => (
+    <BreadItem item={item} onSelect={onSelectBreadItem} />
+  );
   return (
-    <View style={styles.container}>
-      <Button
-        title="Ir a detalle"
-        color={Colors.accent}
-        colorText="white"
-        onPress={() => {
-          navigation.navigate("Detail");
-        }}
-      />
-    </View>
+    <FlatList
+      data={products}
+      keyExtractor={(item) => item.id}
+      renderItem={renderBreadItem}
+      numColumns={1}
+    />
   );
 };
 
 export default CategoryBreadScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "100%",
-  },
-});
