@@ -39,7 +39,7 @@ const CartItem = ({ item, onDelete }) => {
         onPress={() => onDelete(item)}
         style={{ marginLeft: 10 }}
       >
-        <FontAwesome name="remove" size={24} color="black" />
+        <FontAwesome name="remove" size={20} color="#a10101" />
       </TouchableOpacity>
     </View>
   );
@@ -49,14 +49,14 @@ export default CartItem;
 
 const styles = StyleSheet.create({
   item: {
+    backgroundColor:'white',
     flex:1,
     paddingTop: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
     flexDirection: "row",
-    paddingRight: 20,
+    paddingRight: 25,
     height:230,
     alignItems: "center",
+    marginTop:7
   },
   detail: {
     flex: 1,

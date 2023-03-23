@@ -40,7 +40,7 @@ const TabsNavigator = () => {
                   fontSize: 13,
                 }}
               >
-                Home
+                Inicio
               </Text>
             </View>
           ),

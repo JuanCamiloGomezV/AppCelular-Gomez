@@ -1,6 +1,7 @@
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 
 import { CATEGORIES } from "../data/categories";
+import Colors from "../constants/Colors";
 import GridItem from "../components/GridItem";
 import React from "react";
 
@@ -16,6 +17,7 @@ const CategoriesScreen = ({ navigation }) => {
   );
   return (
     <View style={{flex:1}}>
+      <View style={{backgroundColor:'white', marginTop:7}}>
       <FlatList
         data={CATEGORIES}
         keyExtractor={(item) => item.id}
@@ -23,6 +25,7 @@ const CategoriesScreen = ({ navigation }) => {
         numColumns={2}
         style={{padding:10}}
       />
+      </View>
     </View>
   );
 };

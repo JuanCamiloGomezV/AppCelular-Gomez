@@ -34,7 +34,10 @@ const CartScreen = () => {
         style={styles.list}
       />
       <View style={styles.footer}>
-        <TouchableOpacity style={[styles.confirm,{backgroundColor:Colors.primary}]} onPress={onConfirm}>
+        <TouchableOpacity
+          style={[styles.confirm, { backgroundColor: Colors.primary }]}
+          onPress={onConfirm}
+        >
           <View style={styles.total}>
             <Text style={styles.text}>Continuar la compra:</Text>
             <Text style={styles.text}>$1000</Text>
@@ -60,17 +63,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   confirm: {
-    padding:15,
-    width:'80%',
-    borderRadius:10
+    padding: 15,
+    width: "80%",
+    borderRadius: 10,
   },
-  total:{
-    flexDirection:'row',
+  total: {
+    flexDirection: "row",
     justifyContent: "space-between",
   },
-  text:{
-    fontFamily:TextStyle.textRegular,
-    fontSize:16,
-    color:'white'
-  }
+  text: {
+    fontFamily: TextStyle.textRegular,
+    fontSize: 16,
+    color: "white",
+  },
 });
