@@ -1,7 +1,6 @@
 import { FlatList, ScrollView, StyleSheet, View } from "react-native";
 
 import { CATEGORIES } from "../data/categories";
-import Colors from "../constants/Colors";
 import GridItem from "../components/GridItem";
 import React from "react";
 

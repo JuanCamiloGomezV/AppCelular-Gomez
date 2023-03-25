@@ -1,7 +1,5 @@
 import {
-  Button,
   FlatList,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
