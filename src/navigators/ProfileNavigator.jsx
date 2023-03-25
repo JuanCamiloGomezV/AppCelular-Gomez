@@ -1,7 +1,6 @@
 import Colors from "../constants/Colors";
 import ProfileScreen from "../screens/ProfileScreen";
 import React from "react";
-import { StyleSheet } from "react-native";
 import TextStyle from "../constants/TextStyle";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -39,5 +38,3 @@ const ProfileNavigator = () => {
 };
 
 export default ProfileNavigator;
-
-const styles = StyleSheet.create({});

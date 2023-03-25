@@ -1,5 +1,3 @@
-import { Platform, StyleSheet, Text, View } from "react-native";
-
 import CartScreen from "../screens/CartScreen";
 import Colors from "../constants/Colors";
 import React from "react";
@@ -40,4 +38,3 @@ const CartNavigator = () => {
 
 export default CartNavigator;
 
-const styles = StyleSheet.create({});

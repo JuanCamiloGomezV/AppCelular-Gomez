@@ -2,7 +2,6 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import Colors from "../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import TextStyle from "../constants/TextStyle";

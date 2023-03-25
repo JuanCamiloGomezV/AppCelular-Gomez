@@ -1,7 +1,6 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-
 import { BREADS } from "../data/breads";
 import BreadItem from "../components/BreadItem";
+import { FlatList } from "react-native";
 import React from "react";
 
 const CategoryBreadScreen = ({ navigation, route }) => {
