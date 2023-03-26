@@ -5,17 +5,16 @@ import TextStyle from "../constants/TextStyle";
 
 const GridItem = ({ item, onSelect }) => {
   return (
-    <TouchableOpacity onPress={() => onSelect(item)} style={[styles.grid,{ backgroundColor: item.color }]}>
-      <View style={[styles.container, { backgroundColor: item.color }]}>
-        <View
-          style={{ alignItems: "stretch", justifyContent: "flex-end" }}
-        >
-          <Image
-            source={{ uri: item.image }}
-            style={{ width: 80, height: 80 }}
-            resizeMode="contain"
-          />
-        </View>
+    <TouchableOpacity
+      onPress={() => onSelect(item)}
+      style={[styles.grid, { backgroundColor: item.color }]}
+    >
+      <View style={{ alignItems: "stretch", justifyContent: "flex-end" }}>
+        <Image
+          source={{ uri: item.image }}
+          style={{ width: 80, height: 80 }}
+          resizeMode="contain"
+        />
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={styles.title}>{item.title}</Text>
@@ -28,9 +27,9 @@ export default GridItem;
 
 const styles = StyleSheet.create({
   grid: {
-    flex:1,
-    alignItems:'center',
-    margin:8,
+    flex: 1,
+    alignItems: "center",
+    margin: 8,
     padding: 10,
     backgroundColor: "white",
     borderRadius: 10,
@@ -43,16 +42,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
     width: 172,
-    height:155
-  },
-  container: {
-    height: 90,
-    width: 90,
-    borderRadius: 300,
-
-    padding: 0,
-    alignItems: "center",
-    justifyContent: "center",
+    height: 155,
   },
   title: {
     fontFamily: TextStyle.titleRegular,

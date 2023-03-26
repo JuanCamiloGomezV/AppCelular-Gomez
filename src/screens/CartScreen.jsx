@@ -30,6 +30,7 @@ const CartScreen = () => {
         renderItem={renderCartItem}
         numColumns={1}
         style={styles.list}
+        ItemSeparatorComponent={() => <View style={{ height: 7 }} />}
       />
       <View style={styles.footer}>
         <TouchableOpacity
