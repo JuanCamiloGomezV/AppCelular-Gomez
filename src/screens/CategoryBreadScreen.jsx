@@ -1,20 +1,20 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { filterBreads, selectBread } from "../store/actions/breads.action";
+import { useDispatch, useSelector } from "react-redux";
 
-import { BREADS } from "../data/breads";
 import BreadItem from "../components/BreadItem";
-import React from "react";
+import { FlatList } from "react-native";
 
-const CategoryBreadScreen = ({ navigation, route }) => {
-  const { categoryId } = route.params;
-  const products = [];
-  BREADS.map((item) =>
-    item.category.map((category) => {
-      if (category == categoryId) {
-        products.push(item);
-      }
-    })
-  );
+const CategoryBreadScreen = ({ navigation }) => {
+  const categoryBreads = useSelector((state) => state.breads.filteredBreads);
+  const dispatch = useDispatch();
+  const category = useSelector((state) => state.categories.selected);
+  useEffect(() => {
+    dispatch(filterBreads(category.id));
+  }, []);
+
   const onSelectBreadItem = (item) => {
+    dispatch(selectBread(item.id));
     navigation.navigate("Detail", {
       bread: item,
     });
@@ -24,7 +24,7 @@ const CategoryBreadScreen = ({ navigation, route }) => {
   );
   return (
     <FlatList
-      data={products}
+      data={categoryBreads}
       keyExtractor={(item) => item.id}
       renderItem={renderBreadItem}
       numColumns={1}

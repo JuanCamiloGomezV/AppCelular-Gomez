@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import BreadTableInfo from "../components/BreadTableInfo";
 import Colors from "../constants/Colors";
 import TextStyle from "../constants/TextStyle";
+import { useSelector } from "react-redux";
 
-const BreadDetailScreen = ({ route }) => {
+const BreadDetailScreen = () => {
+  const bread = useSelector(state => state.breads.selected)
   const [control, setControl] = useState(0);
-  const { bread } = route.params;
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.containerImage}>
