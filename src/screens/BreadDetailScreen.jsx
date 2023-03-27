@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 
 const BreadDetailScreen = () => {
   const bread = useSelector(state => state.breads.selected)
-  const [control, setControl] = useState(0);
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.containerImage}>
@@ -22,30 +21,7 @@ const BreadDetailScreen = () => {
       </View>
       <View style={styles.containerInfo}>
         <Text style={styles.title}>{bread.name}</Text>
-        <Text style={{ flex: 1, fontFamily: TextStyle.titleRegular, fontSize:15}}>$ {bread.price[control]}</Text>
-        <View style={{ flexDirection: "row" }}>
-          {bread.weight.map((weight, index) => (
-            <TouchableOpacity
-              style={
-                index == control
-                  ? styles.buttonWeightActive
-                  : styles.buttonWeightInactive
-              }
-              key={index}
-              onPress={() => setControl(index)}
-            >
-              <Text
-                style={
-                  index == control
-                    ? styles.textButtonActive
-                    : styles.textButtonInactive
-                }
-              >
-                {weight}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <Text style={{ flex: 1, fontFamily: TextStyle.titleRegular, fontSize:15}}>$ {bread.price}</Text>
       </View>
       <View style={{ padding: 20, marginBottom:95 }}>
         <Text style={styles.titleDescription}>Descripción:</Text>

@@ -4,6 +4,7 @@ import { filterBreads, selectBread } from "../store/actions/breads.action";
 import { useDispatch, useSelector } from "react-redux";
 
 import BreadItem from "../components/BreadItem";
+import { addCartItem } from "../store/actions/cart.action";
 
 const CategoryBreadScreen = ({ navigation }) => {
   const categoryBreads = useSelector((state) => state.breads.filteredBreads);
@@ -19,8 +20,15 @@ const CategoryBreadScreen = ({ navigation }) => {
       bread: item,
     });
   };
+  const onAdd = (item) => {
+    dispatch(addCartItem(item));
+  };
   const renderBreadItem = ({ item }) => (
-    <BreadItem item={item} onSelect={onSelectBreadItem} />
+    <BreadItem
+      item={item}
+      onSelect={onSelectBreadItem}
+      onAdd={onAdd}
+    />
   );
 
   const renderHeader = () => {

@@ -1,12 +1,33 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  handleDecreaseCartItem,
+  handleIncreaseCartItem,
+} from "../store/actions/cart.action";
 
 import Colors from "../constants/Colors";
+import Counter from "./Counter";
 import { FontAwesome } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import React from "react";
 import TextStyle from "../constants/TextStyle";
+import { deleteCartItem } from "../store/actions/cart.action";
+import { useDispatch } from "react-redux";
 
 const CartItem = ({ item, onDelete }) => {
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(item.price * item.quantity);
+  const addQuantity = () => {
+    dispatch(handleIncreaseCartItem(item.id));
+  };
+  const removeQuantity = () => {
+    if (item.quantity > 1) {
+      dispatch(handleDecreaseCartItem(item.id));
+    } else {
+      dispatch(deleteCartItem(item.id));
+    }
+  };
+  useEffect(() => {
+    setTotal(item.price * item.quantity);
+  }, [item.quantity]);
   return (
     <View style={styles.item}>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -16,24 +37,30 @@ const CartItem = ({ item, onDelete }) => {
           resizeMode="contain"
         />
       </View>
-        <View style={styles.detail}>
-          <Text style={[styles.text,{marginBottom:15}]} numberOfLines={2}>
-            {item.name}
-          </Text>
-          <Text style={[styles.text,{marginBottom:15}]}>${item.price}</Text>
-          <View style={[styles.counter,{marginBottom:15}]}>
-            <TouchableOpacity style={styles.button}>
-              <Ionicons name="remove" size={24} color="white" />
-            </TouchableOpacity>
-            <Text style={[styles.text, { textAlign: "center", padding: 10 }]}>
-              {item.quantity}
-            </Text>
-            <TouchableOpacity style={styles.button}>
-              <Ionicons name="add" size={24} color="white" />
-            </TouchableOpacity>
-          </View>
-          <Text style={[styles.text,{marginBottom:20,fontFamily:TextStyle.titleRegular,fontSize: 16}]}>Total: ${item.price * item.quantity}</Text>
-        </View>
+      <View style={styles.detail}>
+        <Text style={[styles.text, { marginBottom: 15 }]} numberOfLines={2}>
+          {item.name}
+        </Text>
+        <Text style={[styles.text, { marginBottom: 15 }]}>${item.price}</Text>
+        <Counter
+          quantity={item.quantity}
+          addQuantity={addQuantity}
+          removeQuantity={removeQuantity}
+          canDelete={true}
+        />
+        <Text
+          style={[
+            styles.text,
+            {
+              marginBottom: 20,
+              fontFamily: TextStyle.titleRegular,
+              fontSize: 16,
+            },
+          ]}
+        >
+          Total: ${total}
+        </Text>
+      </View>
       <TouchableOpacity
         onPress={() => onDelete(item)}
         style={{ marginLeft: 10 }}
@@ -48,18 +75,19 @@ export default CartItem;
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor:'white',
-    flex:1,
+    backgroundColor: "white",
+    flex: 1,
     paddingTop: 10,
     flexDirection: "row",
     paddingRight: 25,
-    height:230,
-    alignItems: "center"
+    height: 230,
+    alignItems: "center",
   },
   detail: {
     flex: 1,
     flexDirection: "column",
-    justifyContent:'center',
+    justifyContent: "center",
+    paddingEnd: 20,
   },
   counter: {
     flexDirection: "row",

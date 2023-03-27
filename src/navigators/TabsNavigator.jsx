@@ -10,10 +10,12 @@ import React from "react";
 import ShopNavigator from "./ShopNavigator";
 import TextStyle from "../constants/TextStyle";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useSelector } from "react-redux";
 
 const BottomTabs = createBottomTabNavigator();
 
 const TabsNavigator = () => {
+  const quantity = useSelector((state) => state.cart.amount);
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -52,11 +54,18 @@ const TabsNavigator = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <View style={styles.tabBarIcon}>
-              <Ionicons
-                name="cart"
-                size={24}
-                color={focused ? Colors.primary : "#748C94"}
-              />
+              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+                <Ionicons
+                  name="cart"
+                  size={24}
+                  color={focused ? Colors.primary : "#748C94"}
+                />
+                {quantity > 0 && (
+                  <View style={styles.quantityContainer}>
+                    <Text style={styles.quantity}>{quantity}</Text>
+                  </View>
+                )}
+              </View>
               <Text
                 style={{
                   color: focused ? "#7F5DF0" : "#748C94",
@@ -122,5 +131,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  quantityContainer: {
+    borderWidth: 1,
+    borderRadius: 300,
+    height: 16.5,
+    width: 16.5,
+    position: "absolute",
+    justifyContent: "center",
+    alignItems: "center",
+    left: 16,
+    bottom: 16,
+    borderColor:'#ac0000',
+    backgroundColor:'#ac0000'
+  },
+  quantity: {
+    color: "white",
+    fontFamily: TextStyle.textRegular,
+    fontSize: 11,
   },
 });

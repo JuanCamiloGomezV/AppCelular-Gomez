@@ -2,10 +2,19 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 
 import Colors from "../constants/Colors";
+import Counter from "./Counter";
 import TextStyle from "../constants/TextStyle";
 
-const BreadItem = ({ item, onSelect }) => {
-  const [control, setControl] = useState(0);
+const BreadItem = ({ item, onSelect, onAdd }) => {
+  const [quantity, setQuantity] = useState(1);
+  const addQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  const removeQuantity = () => {  
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
   return (
     <TouchableOpacity onPress={() => onSelect(item)} style={styles.breadItem}>
       <View
@@ -40,32 +49,18 @@ const BreadItem = ({ item, onSelect }) => {
             { fontFamily: TextStyle.titleRegular, fontSize: 15 },
           ]}
         >
-          $ {Number(item.price[control])}
+          $ {Number(item.price)}
         </Text>
-        <View style={{ flexDirection: "row", marginVertical: 5 }}>
-          {item.weight.map((weight, index) => (
-            <TouchableOpacity
-              style={
-                index == control
-                  ? styles.buttonWeightActive
-                  : styles.buttonWeightInactive
-              }
-              key={index}
-              onPress={() => setControl(index)}
-            >
-              <Text
-                style={
-                  index == control
-                    ? styles.textButtonActive
-                    : styles.textButtonInactive
-                }
-              >
-                {weight}
-              </Text>
-            </TouchableOpacity>
-          ))}
+
+        <View style={{ marginTop: 5 }}>
+          <Counter quantity={quantity} addQuantity={addQuantity} removeQuantity={removeQuantity}/>
         </View>
-        <TouchableOpacity style={[styles.button, { marginTop: 5 }]}>
+        <TouchableOpacity
+          style={[styles.button, { marginTop: 5 }]}
+          onPress={() => {
+            onAdd({...item,quantity:quantity,total:quantity*item.price});
+          }}
+        >
           <Text
             style={{
               color: "white",
@@ -85,8 +80,10 @@ export default BreadItem;
 
 const styles = StyleSheet.create({
   breadItem: {
+    height: 200,
     flexDirection: "row",
-    paddingHorizontal: 7,
+    paddingStart: 7,
+    paddingEnd: 20,
     paddingVertical: 10,
     marginHorizontal: 15,
     borderRadius: 6,
