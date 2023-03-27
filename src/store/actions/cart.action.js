@@ -3,6 +3,7 @@ export const HANDLE_INCREASE_CART_ITEM = 'HANDLE_INCREASE_CART_ITEM'
 export const HANDLE_DECREASE_CART_ITEM = 'HANDLE_DECREASE_CART_ITEM'
 export const ADD_CART_ITEM = 'ADD_CART_ITEM'
 export const CLEAR_CART = 'CLEAR_CART'
+export const SHOW_MODAL = 'SHOW_MODAL'
 
 export const deleteCartItem = (id) => ({
     type: DELETE_CART_ITEM,

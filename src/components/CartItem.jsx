@@ -8,11 +8,12 @@ import {
 import Colors from "../constants/Colors";
 import Counter from "./Counter";
 import { FontAwesome } from "@expo/vector-icons";
+import ModalCart from "./ModalCart";
 import TextStyle from "../constants/TextStyle";
 import { deleteCartItem } from "../store/actions/cart.action";
 import { useDispatch } from "react-redux";
 
-const CartItem = ({ item, onDelete }) => {
+const CartItem = ({ item, onDelete, setModalVisible,modalVisible }) => {
   const dispatch = useDispatch();
   const [total, setTotal] = useState(item.price * item.quantity);
   const addQuantity = () => {
@@ -30,6 +31,7 @@ const CartItem = ({ item, onDelete }) => {
   }, [item.quantity]);
   return (
     <View style={styles.item}>
+      <ModalCart modalVisible={modalVisible} setModalVisible={setModalVisible} onDelete={onDelete} item={item}/>
       <View style={{ justifyContent: "center", alignItems: "center" }}>
         <Image
           source={{ uri: item.image }}
@@ -62,7 +64,7 @@ const CartItem = ({ item, onDelete }) => {
         </Text>
       </View>
       <TouchableOpacity
-        onPress={() => onDelete(item)}
+        onPress={() => setModalVisible(!modalVisible)}
         style={{ marginLeft: 10 }}
       >
         <FontAwesome name="remove" size={20} color="#a10101" />

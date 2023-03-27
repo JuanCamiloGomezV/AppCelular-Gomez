@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../components/CartItem";
@@ -17,6 +17,7 @@ const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const stateTotal = useSelector((state) => state.cart.total);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onDelete = (item) => {
     dispatch(deleteCartItem(item.id));
@@ -25,7 +26,7 @@ const CartScreen = ({ navigation }) => {
     console.log("confirm");
   };
   const renderCartItem = ({ item }) => (
-    <CartItem item={item} onDelete={() => onDelete(item)} />
+    <CartItem item={item} onDelete={() => onDelete(item)} setModalVisible={setModalVisible} modalVisible={modalVisible} />
   );
   return (
     <View style={styles.container}>
@@ -53,7 +54,12 @@ const CartScreen = ({ navigation }) => {
         </>
       ) : (
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center",paddingHorizontal:55 }}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            paddingHorizontal: 55,
+          }}
         >
           <Text style={{ fontFamily: TextStyle.textRegular, fontSize: 20 }}>
             No hay productos en el carrito
@@ -72,7 +78,7 @@ const CartScreen = ({ navigation }) => {
               style={{
                 fontFamily: TextStyle.textRegular,
                 color: "white",
-                textAlign:'center'
+                textAlign: "center",
               }}
             >
               Volver a comprar

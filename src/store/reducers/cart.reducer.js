@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM, CLEAR_CART, DELETE_CART_ITEM, HANDLE_DECREASE_CART_ITEM, HANDLE_INCREASE_CART_ITEM } from "../actions/cart.action";
+import { ADD_CART_ITEM, CLEAR_CART, DELETE_CART_ITEM, HANDLE_DECREASE_CART_ITEM, HANDLE_INCREASE_CART_ITEM, SHOW_MODAL } from "../actions/cart.action";
 
 import { BREADS } from "../../data/breads";
 
@@ -12,7 +12,6 @@ const initialState = {
 const CartReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_CART_ITEM:
-            console.log(state.cart.forEach(item => console.log(item.id, item.name, item.quantity, item.price, item.total)))
             if (state.cart.find(item => item.id === action.item.id)) {
                 return {
                     ...state,
@@ -33,7 +32,6 @@ const CartReducer = (state = initialState, action) => {
                 }
             }
         case DELETE_CART_ITEM:
-            console.log(state.cart.forEach(item => console.log(item.id, item.name, item.quantity, item.price, item.total)))
             return {
                 ...state,
                 total: Number(state.total) - Number(state.cart.find(item => item.id === action.id).total),
@@ -41,7 +39,6 @@ const CartReducer = (state = initialState, action) => {
                 amount: state.amount - 1,
             }
         case HANDLE_DECREASE_CART_ITEM:
-            { console.log(state.cart.find(item => item.id === action.id).quantity) }
             return {
                 ...state,
                 cart: state.cart.map(item => {

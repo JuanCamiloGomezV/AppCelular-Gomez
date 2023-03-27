@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Colors from "../constants/Colors";
 import Counter from "./Counter";
@@ -10,7 +10,7 @@ const BreadItem = ({ item, onSelect, onAdd }) => {
   const addQuantity = () => {
     setQuantity(quantity + 1);
   };
-  const removeQuantity = () => {  
+  const removeQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
     }
@@ -53,12 +53,20 @@ const BreadItem = ({ item, onSelect, onAdd }) => {
         </Text>
 
         <View style={{ marginTop: 5 }}>
-          <Counter quantity={quantity} addQuantity={addQuantity} removeQuantity={removeQuantity}/>
+          <Counter
+            quantity={quantity}
+            addQuantity={addQuantity}
+            removeQuantity={removeQuantity}
+          />
         </View>
         <TouchableOpacity
           style={[styles.button, { marginTop: 5 }]}
           onPress={() => {
-            onAdd({...item,quantity:quantity,total:quantity*item.price});
+            onAdd({
+              ...item,
+              quantity: quantity,
+              total: quantity * item.price,
+            });
           }}
         >
           <Text
