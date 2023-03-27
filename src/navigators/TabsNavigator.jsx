@@ -5,6 +5,7 @@ import Colors from "../constants/Colors";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import OrdersNavigator from "./OrdersNavigator";
 import ProfileNavigator from "./ProfileNavigator";
 import React from "react";
 import ShopNavigator from "./ShopNavigator";
@@ -74,6 +75,30 @@ const TabsNavigator = () => {
                 }}
               >
                 Carrito
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Orders-tab"
+        component={OrdersNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.tabBarIcon}>
+              <FontAwesome
+                name="reorder"
+                size={24}
+                color={focused ? Colors.primary : "#748C94"}
+              />
+              <Text
+                style={{
+                  color: focused ? "#7F5DF0" : "#748C94",
+                  fontFamily: TextStyle.textRegular,
+                  fontSize: 13,
+                }}
+              >
+                Pedidos
               </Text>
             </View>
           ),

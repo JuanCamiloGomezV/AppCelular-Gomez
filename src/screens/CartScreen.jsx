@@ -6,24 +6,29 @@ import {
   View,
 } from "react-native";
 import React, { useState } from "react";
+import { clearCart, confirmCart, deleteCartItem } from "../store/actions/cart.action";
 import { useDispatch, useSelector } from "react-redux";
 
 import CartItem from "../components/CartItem";
 import Colors from "../constants/Colors";
 import TextStyle from "../constants/TextStyle";
-import { deleteCartItem } from "../store/actions/cart.action";
+import { getOrders } from "../store/actions/orders.action";
 
 const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const stateTotal = useSelector((state) => state.cart.total);
   const [modalVisible, setModalVisible] = useState(false);
+  
 
   const onDelete = (item) => {
     dispatch(deleteCartItem(item.id));
   };
   const onConfirm = () => {
     console.log("confirm");
+    dispatch(confirmCart(cart,stateTotal));
+    dispatch(getOrders())
+    dispatch(clearCart())
   };
   const renderCartItem = ({ item }) => (
     <CartItem item={item} onDelete={() => onDelete(item)} setModalVisible={setModalVisible} modalVisible={modalVisible} />

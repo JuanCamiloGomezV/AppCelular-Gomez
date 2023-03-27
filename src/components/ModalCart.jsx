@@ -22,9 +22,6 @@ const ModalCart = ({ modalVisible, setModalVisible, onDelete, item }) => {
       animationType="fade"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => {
-        console.log("Modal has been closed.");
-      }}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
