@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { deleteOrder, getOrders } from "../store/actions/orders.action";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,8 +15,10 @@ import OrderItem from "../components/OrderItem";
 const OrdersScreen = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     dispatch(getOrders());
+    setLoading(false);
   }, []);
   console.log(orders);
   const onDelete = (id) => {
@@ -26,7 +28,7 @@ const OrdersScreen = () => {
   const renderOrderItem = ({ item }) => (
     <OrderItem item={item} onDelete={onDelete} />
   );
-  return orders ? (
+  return !loading ? (
     <View style={styles.container}>
       <View style={styles.containerOrders}>
         <FlatList
