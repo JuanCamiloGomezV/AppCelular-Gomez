@@ -2,6 +2,7 @@ import { URL_API } from '../../data/Database'
 
 export const GET_ORDERS = 'GET_ORDERS'
 export const DELETE_ORDER = 'DELETE_ORDER'
+export const SELECT_ORDER = 'SELECT_ORDER'
 
 export const getOrders = () => {
     return async dispatch => {
@@ -13,7 +14,6 @@ export const getOrders = () => {
                 },
             })
             const result = await response.json()
-            console.log('result', result)
             const orders = Object.keys(result).map(key => ({
                 ...result[key],
                 id: key
@@ -38,8 +38,6 @@ export const deleteOrder = (id) => {
                     'Content-Type': 'application/json'
                 },
             })
-            const result = await response.json()
-            console.log('result', result)
             dispatch({
                 type: DELETE_ORDER,
                 id,
@@ -50,3 +48,7 @@ export const deleteOrder = (id) => {
 
     }
 }
+export const selectOrder = (orderId) => ({
+    type: SELECT_ORDER,
+    orderId,
+})

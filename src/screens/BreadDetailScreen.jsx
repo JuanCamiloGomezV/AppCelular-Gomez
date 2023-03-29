@@ -1,8 +1,8 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
 
 import BreadTableInfo from "../components/BreadTableInfo";
 import Colors from "../constants/Colors";
+import React from "react";
 import TextStyle from "../constants/TextStyle";
 import { useSelector } from "react-redux";
 

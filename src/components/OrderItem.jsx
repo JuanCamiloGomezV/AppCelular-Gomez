@@ -4,13 +4,13 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import TextStyle from "../constants/TextStyle";
 
-const OrderItem = ({ item, onDelete }) => {
+const OrderItem = ({ item, onDelete, onSelect }) => {
   const formatDay = (time) => {
     const date = new Date(time);
     return date.toLocaleDateString();
   };
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=>onSelect(item)}>
       {item.itemsCart[0].category.includes(1) ? (
         <View
           style={{ backgroundColor: "#6699CC", padding: 9, borderRadius: 300 }}

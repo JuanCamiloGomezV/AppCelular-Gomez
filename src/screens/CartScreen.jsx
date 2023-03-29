@@ -25,7 +25,6 @@ const CartScreen = ({ navigation }) => {
     dispatch(deleteCartItem(item.id));
   };
   const onConfirm = () => {
-    console.log("confirm");
     dispatch(confirmCart(cart,stateTotal));
     dispatch(getOrders())
     dispatch(clearCart())

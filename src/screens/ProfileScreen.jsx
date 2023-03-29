@@ -7,17 +7,25 @@ import {
   View,
 } from "react-native";
 
+import ModalPhoto from "../components/ModalPhoto";
+import ModalPhotoBackground from "../components/ModalPhotoBackground";
 import React from "react";
 import TextStyle from "../constants/TextStyle";
 
 const ProfileScreen = () => {
+  const [showModal, setShowModal] = React.useState(false);
+  const handleCloseModal = ()=>{
+    setShowModal(false);
+  }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} >
+    <ModalPhotoBackground isVisible={showModal} onClose={handleCloseModal}  />
+      <ModalPhoto isVisible={showModal} onClose={handleCloseModal}/>
       <ScrollView>
         <Image style={styles.banner} />
         <View style={{ alignItems: "center", backgroundColor:'white', height:100 }}>
           <View style={styles.profileContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>setShowModal(true)}>
               <Image
                 source={{
                   uri: "https://misanimales.com/wp-content/uploads/2018/07/perfiles-de-instagram-sobre-perros.jpg",

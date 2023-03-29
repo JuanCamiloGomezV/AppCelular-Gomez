@@ -1,7 +1,8 @@
-import { DELETE_ORDER, GET_ORDERS } from '../actions/orders.action'
+import { DELETE_ORDER, GET_ORDERS, SELECT_ORDER } from '../actions/orders.action'
 
 const initialState = {
-    orders: []
+    orders: [],
+    selected: null
 }
 
 const OrdersReducer = (state = initialState, action) => {
@@ -16,7 +17,11 @@ const OrdersReducer = (state = initialState, action) => {
                 ...state,
                 orders: state.orders.filter(order => order.id !== action.id)
             }
-
+        case SELECT_ORDER:
+            return {
+                ...state,
+                selected: state.orders.find(order => order.id === action.orderId)
+            }
         default:
             return state
     }

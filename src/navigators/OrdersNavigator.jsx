@@ -1,4 +1,5 @@
 import Colors from '../constants/Colors';
+import OrderDetailScreen from '../screens/OrderDetailScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import React from 'react'
 import { StyleSheet } from 'react-native'
@@ -31,6 +32,13 @@ const OrdersNavigator = () => {
             fontFamily: TextStyle.titlePrincipal,
             fontSize: 25,
           },
+        }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={OrderDetailScreen}
+        options={{
+          title: "Información del pedido",
         }}
       />
     </Stack.Navigator>

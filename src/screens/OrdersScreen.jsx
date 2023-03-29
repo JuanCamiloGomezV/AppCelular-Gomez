@@ -6,13 +6,17 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { deleteOrder, getOrders } from "../store/actions/orders.action";
+import {
+  deleteOrder,
+  getOrders,
+  selectOrder,
+} from "../store/actions/orders.action";
 import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../constants/Colors";
 import OrderItem from "../components/OrderItem";
 
-const OrdersScreen = () => {
+const OrdersScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const [loading, setLoading] = useState(true);
@@ -20,13 +24,19 @@ const OrdersScreen = () => {
     dispatch(getOrders());
     setLoading(false);
   }, []);
-  console.log(orders);
+  const onSelectCartItem = (item) => {
+    dispatch(selectOrder(item.id));
+    navigation.navigate("Detail", {
+      item,
+    });
+  };
+
   const onDelete = (id) => {
     dispatch(deleteOrder(id));
   };
 
   const renderOrderItem = ({ item }) => (
-    <OrderItem item={item} onDelete={onDelete} />
+    <OrderItem item={item} onDelete={onDelete} onSelect={onSelectCartItem}/>
   );
   return !loading ? (
     <View style={styles.container}>
