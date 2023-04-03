@@ -3,9 +3,12 @@ import React from "react";
 import TabsNavigator from "./TabsNavigator";
 
 const MainNavigator = () => {
+  const isAuth = false;
   return (
     <NavigationContainer>
-      <TabsNavigator />
+      {
+         isAuth ? <TabsNavigator /> : <AuthNavigator /> 
+      }
     </NavigationContainer>
   );
 };
