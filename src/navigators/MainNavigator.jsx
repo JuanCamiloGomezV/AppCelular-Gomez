@@ -1,3 +1,4 @@
+import AuthNavigator from "./AuthNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import TabsNavigator from "./TabsNavigator";
