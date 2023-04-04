@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -11,15 +12,50 @@ import Colors from "../constants/Colors";
 import LoginScreen from "./LoginScreen";
 import React from "react";
 import TextStyle from "../constants/TextStyle";
+import { signUp } from "../store/actions/auth.action";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const RegisterScreen = () => {
+  const dispatch = useDispatch();
   const [controlOptions, setControlOptions] = useState("register");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+  const validateForm = () => {
+    if (email == "" || password == "") {
+      alert("Todos los campos son obligatorios");
+      return false;
+    }
+    if (password != confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return false;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      return false;
+    }
+    if (!validateEmail(email)) {
+      alert("El correo electrónico no es válido");
+      return false;
+    }
+    return true;
+  };
+  const onHandleRegister = () => {
+    if (!validateForm()) {
+      return;
+    }
+    dispatch(signUp(email, password));
+  };
   return (
     <KeyboardAvoidingView
       style={styles.screen}
       behavior="padding"
-      keyboardVerticalOffset={-60}
+      keyboardVerticalOffset={-220}
     >
       <View
         style={{
@@ -71,8 +107,44 @@ const RegisterScreen = () => {
         <View style={styles.container}>
           <Text style={styles.title}>Regístrate</Text>
 
-          <View style={styles.form}></View>
-          <TouchableOpacity style={styles.buttonConfirm}>
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder="Correo Electrónico"
+              placeholderTextColor="#ccc"
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="email-address"
+              returnKeyType="next"
+              onChangeText={(text) => setEmail(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Contraseña"
+              placeholderTextColor="#ccc"
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              returnKeyType="next"
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Confirmar Contraseña"
+              placeholderTextColor="#ccc"
+              autoCapitalize="none"
+              autoCorrect={false}
+              keyboardType="default"
+              returnKeyType="done"
+              onChangeText={(text) => setConfirmPassword(text)}
+              secureTextEntry
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.buttonConfirm}
+            onPress={() => onHandleRegister()}
+          >
             <Text style={styles.buttonTextFocus}>Crear Cuenta</Text>
           </TouchableOpacity>
         </View>
