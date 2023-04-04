@@ -1,3 +1,4 @@
+import { SIGN_IN } from "../actions/auth.action";
 import { SIGN_UP } from "../actions/auth.action";
 
 const initialState = {
@@ -21,6 +22,23 @@ const AuthReducer = (state = initialState, action) => {
                 userId: action.userId,
             };
         case "SIGN_UP_FAIL":
+            return {
+                ...state,
+                isLoading: false,
+            };
+        case "SIGN_IN_START":
+            return {
+                ...state,
+                isLoading: true,
+            };
+        case SIGN_IN:
+            return {
+                ...state,
+                isLoading: true,
+                token: action.token,
+                userId: action.userId,
+            };
+        case "SIGN_IN_FAIL":
             return {
                 ...state,
                 isLoading: false,

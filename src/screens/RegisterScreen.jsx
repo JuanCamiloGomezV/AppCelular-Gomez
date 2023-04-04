@@ -7,17 +7,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../constants/Colors";
 import LoginScreen from "./LoginScreen";
 import React from "react";
 import TextStyle from "../constants/TextStyle";
 import { signUp } from "../store/actions/auth.action";
-import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const RegisterScreen = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const [controlOptions, setControlOptions] = useState("register");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -145,7 +146,11 @@ const RegisterScreen = () => {
             style={styles.buttonConfirm}
             onPress={() => onHandleRegister()}
           >
-            <Text style={styles.buttonTextFocus}>Crear Cuenta</Text>
+            {isLoading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text style={styles.buttonTextFocus}>Crear Cuenta</Text>
+            )}
           </TouchableOpacity>
         </View>
       ) : (

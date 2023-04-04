@@ -1,12 +1,48 @@
-import React,{useState} from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../constants/Colors";
 import TextStyle from "../constants/TextStyle";
+import { signIn } from "../store/actions/auth.action";
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.isLoading);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+  const validateForm = () => {
+    if (email == "" || password == "") {
+      alert("Todos los campos son obligatorios");
+      return false;
+    }
+    if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      return false;
+    }
+    if (!validateEmail(email)) {
+      alert("El correo electrónico no es válido");
+      return false;
+    }
+    return true;
+  };
+  const onHandleLogin = () => {
+    if (!validateForm()) {
+      return;
+    }
+    dispatch(signIn(email, password));
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Inicia Sesión</Text>
@@ -36,9 +72,13 @@ const LoginScreen = () => {
       </View>
       <TouchableOpacity
         style={styles.buttonConfirm}
-        onPress={() => {}}
+        onPress={() => onHandleLogin()}
       >
-        <Text style={styles.buttonTextFocus}>Iniciar Sesión</Text>
+        {isLoading ? (
+          <ActivityIndicator size="small" color="white" />
+        ) : (
+          <Text style={styles.buttonTextFocus}>Iniciar Sesión</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
