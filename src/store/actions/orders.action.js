@@ -7,6 +7,9 @@ export const SELECT_ORDER = 'SELECT_ORDER'
 export const getOrders = () => {
     return async dispatch => {
         try {
+            dispatch({
+                type: "GET_ORDERS_START"
+            })
             const response = await fetch(URL_API + 'orders.json', {
                 method: 'GET',
                 headers: {

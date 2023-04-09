@@ -5,7 +5,7 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   deleteOrder,
   getOrders,
@@ -19,10 +19,9 @@ import OrderItem from "../components/OrderItem";
 const OrdersScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
-  const [loading, setLoading] = useState(true);
+  const loading = useSelector((state) => state.orders.loading);
   useEffect(() => {
     dispatch(getOrders());
-    setLoading(false);
   }, []);
   const onSelectCartItem = (item) => {
     dispatch(selectOrder(item.id));
