@@ -11,12 +11,16 @@ import ModalPhoto from "../components/ModalPhoto";
 import ModalPhotoBackground from "../components/ModalPhotoBackground";
 import React from "react";
 import TextStyle from "../constants/TextStyle";
+import { useSelector } from "react-redux";
 
 const ProfileScreen = () => {
   const [showModal, setShowModal] = React.useState(false);
+  const photo = useSelector((state) => state.photo.places.image);
+  console.log(photo);
   const handleCloseModal = ()=>{
     setShowModal(false);
   }
+
   return (
     <View style={{ flex: 1 }} >
     <ModalPhotoBackground isVisible={showModal} onClose={handleCloseModal}  />
@@ -28,7 +32,7 @@ const ProfileScreen = () => {
             <TouchableOpacity onPress={()=>setShowModal(true)}>
               <Image
                 source={{
-                  uri: "https://misanimales.com/wp-content/uploads/2018/07/perfiles-de-instagram-sobre-perros.jpg",
+                  uri: photo?photo:'https://i.pinimg.com/280x280_RS/42/03/a5/4203a57a78f6f1b1cc8ce5750f614656.jpg',
                 }}
                 style={styles.profile}
               />
